@@ -131,7 +131,7 @@ public class Practice {
   public static <T> boolean twoWay(Vertex<T> v1, Vertex<T> v2) {
     boolean result = false;
     if(v1 == null && v2 == null) return false;
-    if(v1 == v2) return false;
+    if(v1 == v2) return true;
 
     if(twoWay(v1, v2, v1, new LinkedList<>()) == true && twoWay(v1, v2, v2, new LinkedList<>())) result = true;
     return result;
