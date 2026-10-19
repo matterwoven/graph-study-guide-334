@@ -97,15 +97,20 @@ public class Practice {
    */
   public static List<Integer> sortedReachable(Map<Integer, Set<Integer>> graph, int starting) {
     if(graph.isEmpty() || !graph.containsKey(starting)) return new LinkedList<>();
-    List<Vertex> visited = new LinkedList<>();
-    List<Vertex> allVisited = sortedReachable(starting, visited);
-    List<Integer> visitedNums = new LinkedList<>();
+    List<Integer> visited = new LinkedList<>();
+    List<Integer> allVisited = sortedReachable(graph, starting, visited);
     
-    for (Vertex<Integer> n : allVisited) {
-        visitedNums.add(n.data);
+    allVisited.sort(null);
+    return allVisited;
+  }
+
+  private static List<Integer> sortedReachable(Map<Integer, Set<Integer>> graph, int starting, List<Integer> visited){
+    if(!visited.contains(starting)) return visited;
+    visited.add(starting);
+    for(int n : graph.get(starting)){
+      sortedReachable(graph, n, visited);
     }
-    visitedNums.sort(null);
-    return visitedNums;
+    return visited;
   }
 
   /**
