@@ -132,9 +132,8 @@ public class Practice {
     boolean result = false;
     if(v1 == null && v2 == null) return false;
     if(v1 == v2) return false;
-    for(Vertex<T> n : v1.neighbors){
-      if(twoWay(v1, v2, v1, new LinkedList<>()) == true && twoWay(v1, v2, v2, new LinkedList<>())) result = true;
-    }
+
+    if(twoWay(v1, v2, v1, new LinkedList<>()) == true && twoWay(v1, v2, v2, new LinkedList<>())) result = true;
     return result;
   }
 
