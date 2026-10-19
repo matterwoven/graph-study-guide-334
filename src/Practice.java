@@ -26,11 +26,12 @@ public class Practice {
    * @return the number of vertices with odd values reachable from the starting vertex
    */
   public static int oddVertices(Vertex<Integer> starting) {
+    if(starting.data == null) return 0;
     List<Vertex> visited = new LinkedList<>();
     List<Vertex> allVisited = oddVertices(starting, visited);
     int count = 0;
     for (Vertex<Integer> n : allVisited) {
-        if(n.data % 2 == 0) count++;
+        if(n.data % 2 != 0) count++;
     }
     return count;
   }
@@ -39,9 +40,7 @@ public class Practice {
     if(visited.contains(starting)) return visited;
     visited.add(starting);
     for(Vertex<Integer> n : starting.neighbors){
-      for(Vertex<Integer> i : oddVertices(n, visited)){
-        visited.add(i);
-      }
+      oddVertices(n, visited);
     }
     return visited;
   }
