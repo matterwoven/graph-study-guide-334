@@ -275,7 +275,7 @@ public class Practice {
     List<int[]> moves = new LinkedList<>();
     for (int i = 0; i < directions.length; i++) {
       int[] currentMove = new int[]{ current[0] + directions[i][0], current[1] + directions[i][1]};
-      if(board[0].length <= currentMove[0] || board.length <= currentMove[1]) continue;
+      if(board.length <= currentMove[0] || board[0].length <= currentMove[1]) continue;
       if(currentMove[0] < 0 || currentMove[1] < 0) continue;
       if(board[currentMove[0]][currentMove[1]] == 'X') continue;
       moves.add(current);
