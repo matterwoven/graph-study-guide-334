@@ -161,7 +161,7 @@ public class Practice {
    */
   public static List<Integer> visited = new LinkedList<>(); 
   public static boolean positivePathExists(Map<Integer, Set<Integer>> graph, int starting, int ending) {
-    if(starting > 0) return false;
+    if(starting < 0) return false;
     if(starting == ending) return true;
     for(int n : graph.get(starting)){
       if(positivePathExists(graph, n, ending) == true) return true;
