@@ -1,3 +1,4 @@
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -25,7 +26,24 @@ public class Practice {
    * @return the number of vertices with odd values reachable from the starting vertex
    */
   public static int oddVertices(Vertex<Integer> starting) {
-    return 0;
+    List<Vertex> visited = new LinkedList<>();
+    List<Vertex> allVisited = oddVertices(starting, visited);
+    int count = 0;
+    for (Vertex<Integer> n : allVisited) {
+        if(n.data % 2 == 0) count++;
+    }
+    return count;
+  }
+
+  private static List<Vertex> oddVertices(Vertex<Integer> starting, List<Vertex> visited){
+    if(visited.contains(starting)) return visited;
+    visited.add(starting);
+    for(Vertex<Integer> n : starting.neighbors){
+      for(Vertex<Integer> i : oddVertices(n, visited)){
+        visited.add(i);
+      }
+    }
+    return visited;
   }
 
   /**
