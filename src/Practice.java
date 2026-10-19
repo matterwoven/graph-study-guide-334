@@ -1,4 +1,5 @@
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -159,12 +160,19 @@ public class Practice {
    * @param ending the ending vertex value
    * @return whether there exists a valid positive path from starting to ending
    */
-  public static List<Integer> visited = new LinkedList<>(); 
   public static boolean positivePathExists(Map<Integer, Set<Integer>> graph, int starting, int ending) {
-    if(starting > 0) return false;
+    if(starting < 0 || ending < 0) return false;
     if(starting == ending) return true;
-    for(int n : graph.get(starting)){
-      if(positivePathExists(graph, n, ending) == true) return true;
+    if(!graph.containsKey(starting) || !graph.containsKey(ending)) return false;
+    return positivePathExists(graph, starting, ending, new HashSet<>());
+  }
+  public static boolean positivePathExists(Map<Integer, Set<Integer>> graph, int starting, int ending, Set<Integer> visited) {
+    if(starting < 0) return false;
+    if(starting == ending) return true;
+    if(visited.contains(starting)) return false;
+    visited.add(starting);
+    for(int n : graph.getOrDefault(starting, Collections.emptySet())){
+      if(positivePathExists(graph, n, ending, visited)) return true;
     }
     return false;
   }
