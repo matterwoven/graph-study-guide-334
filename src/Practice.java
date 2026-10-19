@@ -25,8 +25,9 @@ public class Practice {
    * @param starting the starting vertex (may be null)
    * @return the number of vertices with odd values reachable from the starting vertex
    */
+
   public static int oddVertices(Vertex<Integer> starting) {
-    if(starting.data == null) return 0;
+    if(starting == null || starting.data == null) return 0;
     List<Vertex> visited = new LinkedList<>();
     List<Vertex> allVisited = oddVertices(starting, visited);
     int count = 0;
@@ -43,7 +44,6 @@ public class Practice {
       oddVertices(n, visited);
     }
     return visited;
-  }
 
   /**
    * Returns a *sorted* list of all values reachable from the starting vertex (including the starting vertex itself).
