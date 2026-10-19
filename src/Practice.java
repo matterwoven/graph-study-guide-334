@@ -129,6 +129,20 @@ public class Practice {
    * @return true if there is a two-way connection between v1 and v2, false otherwise
    */
   public static <T> boolean twoWay(Vertex<T> v1, Vertex<T> v2) {
+    boolean result = false;
+    for(Vertex<T> n : v1.neighbors){
+      if(twoWay(v1, v2, v1, new LinkedList<>()) == true && twoWay(v1, v2, v2, new LinkedList<>())) result = true;
+    }
+    return result;
+  }
+
+  private static <T> boolean twoWay(Vertex<T> v1, Vertex<T> v2, Vertex<T> current, List<Vertex> visited) {
+    if(visited.contains(current)) return false;
+    visited.add(current);
+    if(visited.contains(v1) && current == v2 || visited.contains(v2) && current == v1) return true;
+    for (Vertex n : current.neighbors) {
+        if(twoWay(v1, v2, n, visited) == true) return true;
+    }
     return false;
   }
 
