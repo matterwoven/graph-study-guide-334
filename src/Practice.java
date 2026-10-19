@@ -26,7 +26,7 @@ public class Practice {
    * @return the number of vertices with odd values reachable from the starting vertex
    */
   public static int oddVertices(Vertex<Integer> starting) {
-    if(starting == null || starting.data == null) return 0;
+    if(starting.data == null) return 0;
     List<Vertex> visited = new LinkedList<>();
     List<Vertex> allVisited = oddVertices(starting, visited);
     int count = 0;
@@ -64,7 +64,23 @@ public class Practice {
    * @return a sorted list of all reachable vertex values by 
    */
   public static List<Integer> sortedReachable(Vertex<Integer> starting) {
-    return null;
+    if(starting.data == null) return 0;
+    List<Vertex> visited = new LinkedList<>();
+    List<Vertex> allVisited = oddVertices(starting, visited);
+    int count = 0;
+    for (Vertex<Integer> n : allVisited) {
+        if(n.data % 2 != 0) count++;
+    }
+    return allVisited.sort();
+  }
+
+  private static List<Vertex> sortedReachable(Vertex<Integer> starting, List<Vertex> visited){
+    if(visited.contains(starting)) return visited;
+    visited.add(starting);
+    for(Vertex<Integer> n : starting.neighbors){
+      oddVertices(n, visited);
+    }
+    return visited;
   }
 
   /**
