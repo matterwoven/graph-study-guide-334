@@ -106,7 +106,7 @@ public class Practice {
   }
 
   private static List<Integer> sortedReachable(Map<Integer, Set<Integer>> graph, int starting, List<Integer> visited){
-    if(!visited.contains(starting)) return visited;
+    if(visited.contains(starting)) return visited;
     visited.add(starting);
     for(int n : graph.getOrDefault(starting, Collections.emptySet())){
       sortedReachable(graph, n, visited);
